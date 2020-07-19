@@ -2,9 +2,10 @@ const Sequelize = require('sequelize');
 const postgresConf = require('../config/database');
 const User = require('../models/User');
 
-module.exports = () => {
-    const conn = new Sequelize(postgresConf);
+const sequelizeLoader = () => {
+    const sequelize = new Sequelize(postgresConf);
 
-    User.init(conn);
-    return conn;
+    User.init(sequelize);
+    return sequelize.models;
 }
+module.exports = sequelizeLoader;

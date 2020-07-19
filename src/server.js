@@ -1,11 +1,9 @@
-const express = require('express');
-const loaders = require('./loaders');
+const appLoader = require('./loaders');
 const config = require('./config/config');
 
+function startServer() {
 
-async function startServer() {
-    const app = express();
-    await loaders(app);
+    const app = appLoader();
 
     // Initialize the app.
     let server = app.listen(config.port, function () {

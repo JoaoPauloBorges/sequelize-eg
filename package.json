@@ -6,11 +6,12 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore __tests__",
+    "test": "jest",
+    "test:oh": "jest --detectOpenHandles",
+    "pretest": "cross-env NODE_ENV=test npm run migrate",
+    "posttest": "cross-env NODE_ENV=test npm run migrate:undo",
     "migrate": "npx sequelize-cli db:migrate",
-    "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
-    "pretest": "cross-env NODE_ENV=test sequelize db:migrate",
-    "test": "jest --detectOpenHandles",
-    "posttest": "cross-env NODE_ENV=test sequelize db:migrate:undo:all"
+    "migrate:undo": "npx sequelize-cli db:migrate:undo:all"
   },
   "author": "",
   "license": "ISC",
@@ -22,11 +23,14 @@
     "sequelize": "^5.22.3"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.5",
     "cross-env": "^7.0.2",
     "cucumber": "^6.0.5",
+    "faker": "^4.1.0",
     "jest": "^26.1.0",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^5.5.1",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "supertest": "^4.0.2"
   }
 }

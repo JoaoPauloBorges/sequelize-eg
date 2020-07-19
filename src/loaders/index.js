@@ -1,17 +1,17 @@
+const express = require('express');
 const expressLoader = require('./express');
 const sequelizeLoader = require('./sequelize');
 
-// require('dotenv').config({
-//     path: process.env.NODE_ENV === 'teste' ? '.env.test': '.env'
-// });
 
-const loader = async function (app) {
-    await expressLoader(app);
+const app = function () {
+    const app = express();
+    expressLoader(app);
     console.log('Express Intialized');
 
-    await sequelizeLoader();
+    sequelizeLoader();
     console.log('Database Intialized');
 
+    return app;
 }
 
-module.exports = loader;
+module.exports = app;
